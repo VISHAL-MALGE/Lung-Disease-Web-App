@@ -387,6 +387,14 @@
             color: var(--text-secondary);
             margin-bottom: 20px;
         }
+
+        .result-details .note {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(16, 185, 129, 0.3);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
         
         .result-details {
             background-color: rgba(16, 185, 129, 0.1);
@@ -716,15 +724,18 @@
                 
                 <div class="result-container" id="resultContainer">
                     <h3 class="result-title">
-                        <i class="fas fa-clipboard-check"></i> <span id="detectedDisease">Pneumonia</span>
+                        <i class="fas fa-clipboard-check"></i> <span id="detectedDisease">Normal (Healthy Lungs)</span>
                     </h3>
                     <p class="result-description" id="diseaseDescription">
-                        Our analysis has detected patterns consistent with pneumonia in the uploaded CT scan. Pneumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus, causing cough with phlegm, fever, chills, and difficulty breathing.
+                        Based on the uploaded CT scan image, no radiological abnormalities have been identified. The lung fields appear well-aerated, with normal bronchial and vascular markings. There are no signs of consolidation, fibrosis, interstitial thickening, or emphysematous changes. The tracheobronchial structures are patent, and no pleural or mediastinal abnormalities are observed.
                     </p>
                     <div class="result-details">
-                        <p><strong>Confidence:</strong> <span id="confidenceLevel">92%</span></p>
-                        <p><strong>Affected Areas:</strong> <span id="affectedAreas">Lower right lobe, partial involvement of left lobe</span></p>
-                        <p><strong>Recommendation:</strong> <span id="recommendation">Please consult with a healthcare professional for further evaluation and treatment options.</span></p>
+                        <p><strong>Impression:</strong> <span id="impression">CT features are consistent with normal pulmonary architecture. No radiological evidence of lung pathology is identified at this time.</span></p>
+                        <p><strong>Prediction Result:</strong> <span id="predictionResult">Healthy Lungs</span></p>
+                        <p><strong>Confidence:</strong> <span id="confidenceLevel">97%</span></p>
+                        <p><strong>Affected Areas:</strong> <span id="affectedAreas">None</span></p>
+                        <p><strong>Recommendation:</strong> <span id="recommendation">The uploaded scan indicates normal pulmonary function with no signs of lung disease. No further diagnostic evaluation is necessary at this time. Routine health monitoring is advised.</span></p>
+                        <p class="note"><strong>Note:</strong> <span id="medicalNote">This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.</span></p>
                     </div>
                 </div>
             </div>
@@ -888,55 +899,73 @@
         }
         
         // Process Image Button
-        processButton.addEventListener('click', () => {
-            if (fileInput.files && fileInput.files[0]) {
-                // Show loading state
-                processButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                processButton.disabled = true;
-                
-                // Simulate processing delay
-                setTimeout(() => {
-                    // Reset button state
-                    processButton.innerHTML = '<i class="fas fa-cogs"></i> Process Image';
-                    processButton.disabled = false;
-                    
-                    // Show results (in a real app, this would come from the backend)
-                    resultContainer.style.display = 'block';
-                    
-                    // Scroll to result
-                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // Example of dynamic result (would be from API in real app)
-                    simulateDetection();
-                }, 2000);
-            } else {
-                alert('Please upload an image first');
-            }
-        });
+        // Process Image Button
+processButton.addEventListener('click', () => {
+    if (fileInput.files && fileInput.files[0]) {
+        // Show loading state
+        processButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        processButton.disabled = true;
+
+        // Simulate processing delay
+        setTimeout(() => {
+            // Reset button state
+            processButton.innerHTML = '<i class="fas fa-cogs"></i> Process Image';
+            processButton.disabled = false;
+
+            // Show results (in a real app, this would come from the backend)
+            resultContainer.style.display = 'block';
+
+            // Scroll to result
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Example of dynamic result (would be from API in real app)
+            simulateDetection();
+        }, 2000);
+    } else {
+        alert('Please upload an image first');
+    }
+});
+
         
         // Simulate different detection results (for demo purposes)
         function simulateDetection() {
             const diseases = [
                 {
-                    name: 'Pneumonia',
-                    description: 'Our analysis has detected patterns consistent with pneumonia in the uploaded CT scan. Pneumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus, causing cough with phlegm, fever, chills, and difficulty breathing.',
+                    Medical,Report: 'Normal (Healthy Lungs)',
+                    Description: 'Based on the uploaded CT scan image, no radiological abnormalities have been identified. The lung fields appear well-aerated, with normal bronchial and vascular markings. There are no signs of consolidation, fibrosis, interstitial thickening, or emphysematous changes. The tracheobronchial structures are patent, and no pleural or mediastinal abnormalities are observed.',
+
+                    
+                    Impression: 'CT features are consistent with normal pulmonary architecture. No radiological evidence of lung pathology is identified at this time.',
+
+                    Prediction,Result: 'Healthy Lungs',  
+                    confidence: '97%',
+                    Affected,Areas: 'None',
+                    Recommendation: 'The uploaded scan indicates normal pulmonary function with no signs of lung disease. No further diagnostic evaluation is necessary at this time. Routine health monitoring is advised.',
+
+
+                    Note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.'
+                },
+                {
+                    Medical,Report: 'Pulmonary Fibrosis',
+                    Description: 'Based on the uploaded CT scan image, there is evidence of pulmonary fibrosis, characterized by interstitial thickening, subpleural reticulation, and early honeycombing patterns. These findings are consistent with fibrotic lung disease, typically involving chronic scarring of the lung tissue. There may also be areas of ground-glass opacities, indicating ongoing alveolar damage.',
+
+                    Prediction,Result: 'Pulmonary Fibrosis',               
                     confidence: '92%',
-                    areas: 'Lower right lobe, partial involvement of left lobe',
-                    recommendation: 'Please consult with a healthcare professional for further evaluation and treatment options.'
+                    Affected,Areas: 'Bilateral lower lobes (more prominent in peripheral zones)',
+                    Recommendation: 'Please consult a pulmonologist or respiratory specialist for further clinical evaluation. Pulmonary function tests (PFTs), blood work, and possible biopsy may be needed to determine the extent and stage of the disease. Early intervention may help slow disease progression.',
+
+                    Note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.'
                 },
                 {
-                    name: 'Tuberculosis (TB)',
-                    description: 'The analysis indicates patterns consistent with tuberculosis. TB is an infectious disease that mainly affects the lungs. The bacteria that cause TB spread when an infected person coughs or sneezes.',
-                    confidence: '87%',
-                    areas: 'Upper lobes with cavitation observed',
-                    recommendation: 'Immediate consultation with a pulmonologist is strongly advised for further testing and treatment.'
-                },
-                {
-                    name: 'Chronic Obstructive Pulmonary Disease (COPD)',
-                    description: 'The scan shows signs consistent with COPD, a chronic inflammatory lung disease that causes obstructed airflow from the lungs. Symptoms include breathing difficulty, cough, mucus production and wheezing.',
-                    confidence: '89%',
-                    areas: 'Diffuse involvement with hyperinflation',
-                    recommendation: 'Follow up with a pulmonary specialist to discuss management strategies and treatment options.'
+                    Medical,Report: 'Chronic Obstructive Pulmonary Disease (COPD)',
+                    Description: 'Based on the uploaded CT scan image, the lung fields exhibit hyperinflation, reduced parenchymal attenuation, and bronchial wall thickening, which are hallmark features of Chronic Obstructive Pulmonary Disease (COPD). Additional findings include flattening of the diaphragm and signs of air trapping, suggesting obstructive airway disease, most consistent with emphysematous or chronic bronchitic patterns.',
+                    Prediction,Result: 'Chronic Obstructive Pulmonary Disease (COPD)',
+                    Confidence: '89%',
+                    Affected,Areas: ' Lower right lobe; partial involvement of the left lower lobe',
+                    Recommendation: 'A comprehensive pulmonary assessment is strongly advised. Please consult a healthcare provider for spirometry and treatment planning. Early diagnosis and medical management can significantly improve quality of life and disease outcomes.',
+
+                    Note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.'
+
                 }
             ];
             
@@ -944,11 +973,15 @@
             const randomDisease = diseases[Math.floor(Math.random() * diseases.length)];
             
             // Update the UI with the detected disease information
-            document.getElementById('detectedDisease').textContent = randomDisease.name;
-            document.getElementById('diseaseDescription').textContent = randomDisease.description;
-            document.getElementById('confidenceLevel').textContent = randomDisease.confidence;
-            document.getElementById('affectedAreas').textContent = randomDisease.areas;
-            document.getElementById('recommendation').textContent = randomDisease.recommendation;
+            document.getElementById('detectedDisease').textContent = result.name;
+            document.getElementById('diseaseDescription').textContent = result.description;
+            document.getElementById('impression').textContent = result.impression;
+            document.getElementById('predictionResult').textContent = result.predictionResult;
+            document.getElementById('confidenceLevel').textContent = result.confidence;
+            document.getElementById('affectedAreas').textContent = result.areas;
+            document.getElementById('recommendation').textContent = result.recommendation;
+            document.getElementById('medicalNote').textContent = result.note;
+
         }
         
         // Scroll Animations
@@ -969,5 +1002,6 @@
         // Initial check and scroll event listener
         window.addEventListener('load', checkScroll);
         window.addEventListener('scroll', checkScroll);
+        
     </script>
 </body>
