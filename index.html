@@ -15,6 +15,7 @@
             --text: #2c3e50;           /* Dark gray for main text - not pure black for less strain */
             --text-secondary: #6B7280; /* Medium gray for secondary text */
             --transition: all 0.3s ease;
+            --transition: all 0.3s ease-in-out;
         }
         
         * {
@@ -65,6 +66,7 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+            
         }
         
         .logo {
@@ -77,28 +79,39 @@
             gap: 10px;
             transition: var(--transition);
         }
+
+        .logo:hover {
+            color: var(--primary);
+            transform: scale(1.05);
+        }
         
         .nav-menu {
             display: flex;
-            gap: 30px;
+            gap: 36px;
         }
         
         .nav-link {
             position: relative;
-            font-weight: 500;
+            font-weight: 600;
             padding: 5px 0;
             transition: var(--transition);
         }
         
         .nav-link:hover {
             color: var(--primary-light);
+            transform: scale(1.07);
+        
         }
+        
         
         .nav-link.active {
             color: var(--primary-light);
+            color: #3498db;
         }
         
-        .nav-link.active::after {
+
+        /* bar hover effect on nav bar*/
+        /* .nav-link.active::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -106,7 +119,7 @@
             width: 100%;
             height: 2px;
             background-color: var(--primary-light);
-        }
+        } */
         
         .mobile-toggle {
             display: none;
@@ -207,7 +220,8 @@
         
         .cta-button:hover {
             background-color: var(--primary-light);
-            transform: translateY(-2px);
+            /* transform: translateY(-2px); */
+            transform: scale(1.03);
         }
         
         .secondary-button {
@@ -218,7 +232,14 @@
         }
         
         .secondary-button:hover {
-            background-color: rgba(110, 86, 207, 0.1);
+            /* background-color: rgba(0, 0, 0, 0.1); */
+
+            background-color: rgb(231, 239, 249);
+            color: rgb(44, 44, 44);
+            /* transform: translateY(-2px); */
+            transform: scale(1.03);
+            
+
         }
         
         /* Section styles */
@@ -277,7 +298,8 @@
         .about-card p {
             color: var(--text-secondary);
         }
-        
+
+
         /* Services section */
         .services-container {
             margin-top: 60px;
@@ -334,7 +356,11 @@
         }
         
         .upload-area:hover {
-            background-color: rgba(110, 86, 207, 0.05);
+            /* background-color: rgba(110, 86, 207, 0.05); */
+            background-color: rgb(244, 244, 244);
+            color: rgb(0, 0, 0);
+            /* transform: translateY(-2px); */
+            transform: scale(1.03);
         }
         
         .upload-icon {
@@ -367,7 +393,7 @@
         
         .result-container {
             width: 100%;
-            background-color: var(--card-bg);
+            background-color: #ebf1f9;
             border-radius: 12px;
             padding: 30px;
             margin-top: 30px;
@@ -899,7 +925,6 @@
         }
         
         // Process Image Button
-        // Process Image Button
 processButton.addEventListener('click', () => {
     if (fileInput.files && fileInput.files[0]) {
         // Show loading state
@@ -926,82 +951,119 @@ processButton.addEventListener('click', () => {
     }
 });
 
-        
-        // Simulate different detection results (for demo purposes)
-        function simulateDetection() {
-            const diseases = [
-                {
-                    Medical,Report: 'Normal (Healthy Lungs)',
-                    Description: 'Based on the uploaded CT scan image, no radiological abnormalities have been identified. The lung fields appear well-aerated, with normal bronchial and vascular markings. There are no signs of consolidation, fibrosis, interstitial thickening, or emphysematous changes. The tracheobronchial structures are patent, and no pleural or mediastinal abnormalities are observed.',
-
-                    
-                    Impression: 'CT features are consistent with normal pulmonary architecture. No radiological evidence of lung pathology is identified at this time.',
-
-                    Prediction,Result: 'Healthy Lungs',  
-                    confidence: '97%',
-                    Affected,Areas: 'None',
-                    Recommendation: 'The uploaded scan indicates normal pulmonary function with no signs of lung disease. No further diagnostic evaluation is necessary at this time. Routine health monitoring is advised.',
-
-
-                    Note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.'
-                },
-                {
-                    Medical,Report: 'Pulmonary Fibrosis',
-                    Description: 'Based on the uploaded CT scan image, there is evidence of pulmonary fibrosis, characterized by interstitial thickening, subpleural reticulation, and early honeycombing patterns. These findings are consistent with fibrotic lung disease, typically involving chronic scarring of the lung tissue. There may also be areas of ground-glass opacities, indicating ongoing alveolar damage.',
-
-                    Prediction,Result: 'Pulmonary Fibrosis',               
-                    confidence: '92%',
-                    Affected,Areas: 'Bilateral lower lobes (more prominent in peripheral zones)',
-                    Recommendation: 'Please consult a pulmonologist or respiratory specialist for further clinical evaluation. Pulmonary function tests (PFTs), blood work, and possible biopsy may be needed to determine the extent and stage of the disease. Early intervention may help slow disease progression.',
-
-                    Note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.'
-                },
-                {
-                    Medical,Report: 'Chronic Obstructive Pulmonary Disease (COPD)',
-                    Description: 'Based on the uploaded CT scan image, the lung fields exhibit hyperinflation, reduced parenchymal attenuation, and bronchial wall thickening, which are hallmark features of Chronic Obstructive Pulmonary Disease (COPD). Additional findings include flattening of the diaphragm and signs of air trapping, suggesting obstructive airway disease, most consistent with emphysematous or chronic bronchitic patterns.',
-                    Prediction,Result: 'Chronic Obstructive Pulmonary Disease (COPD)',
-                    Confidence: '89%',
-                    Affected,Areas: ' Lower right lobe; partial involvement of the left lower lobe',
-                    Recommendation: 'A comprehensive pulmonary assessment is strongly advised. Please consult a healthcare provider for spirometry and treatment planning. Early diagnosis and medical management can significantly improve quality of life and disease outcomes.',
-
-                    Note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.'
-
-                }
-            ];
-            
-            // Randomly select a disease for demo purposes
-            const randomDisease = diseases[Math.floor(Math.random() * diseases.length)];
-            
-            // Update the UI with the detected disease information
-            document.getElementById('detectedDisease').textContent = result.name;
-            document.getElementById('diseaseDescription').textContent = result.description;
-            document.getElementById('impression').textContent = result.impression;
-            document.getElementById('predictionResult').textContent = result.predictionResult;
-            document.getElementById('confidenceLevel').textContent = result.confidence;
-            document.getElementById('affectedAreas').textContent = result.areas;
-            document.getElementById('recommendation').textContent = result.recommendation;
-            document.getElementById('medicalNote').textContent = result.note;
-
+// Simulate different detection results (for demo purposes)
+function simulateDetection() {
+    const diseases = [
+        {
+            name: 'Normal (Healthy Lungs)',
+            description: 'Based on the uploaded CT scan image, no radiological abnormalities have been identified. The lung fields appear well-aerated, with normal bronchial and vascular markings. There are no signs of consolidation, fibrosis, interstitial thickening, or emphysematous changes. The tracheobronchial structures are patent, and no pleural or mediastinal abnormalities are observed.',
+            impression: 'CT features are consistent with normal pulmonary architecture. No radiological evidence of lung pathology is identified at this time.',
+            predictionResult: 'Healthy Lungs',  
+            confidence: '97%',
+            areas: 'None',
+            recommendation: 'The uploaded scan indicates normal pulmonary function with no signs of lung disease. No further diagnostic evaluation is necessary at this time. Routine health monitoring is advised.',
+            note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.',
+            status: 'healthy', // Add status field to determine color
+            icon: '<i class="fas fa-lungs" style="color: #10B981;"></i>' // Green lungs icon for healthy
+        },
+        {
+            name: 'Pulmonary Fibrosis',
+            description: 'Based on the uploaded CT scan image, there is evidence of pulmonary fibrosis, characterized by interstitial thickening, subpleural reticulation, and early honeycombing patterns. These findings are consistent with fibrotic lung disease, typically involving chronic scarring of the lung tissue. There may also be areas of ground-glass opacities, indicating ongoing alveolar damage.',
+            impression: 'CT features are consistent with pulmonary fibrosis. Recommend clinical correlation.',
+            predictionResult: 'Pulmonary Fibrosis',               
+            confidence: '92%',
+            areas: 'Bilateral lower lobes (more prominent in peripheral zones)',
+            recommendation: 'Please consult a pulmonologist or respiratory specialist for further clinical evaluation. Pulmonary function tests (PFTs), blood work, and possible biopsy may be needed to determine the extent and stage of the disease. Early intervention may help slow disease progression.',
+            note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.',
+            status: 'disease',
+            icon: '<i class="fas fa-lungs-virus" style="color: #DC2626;"></i>' // Red lungs virus icon for respiratory disease
+        },
+        {
+            name: 'Chronic Obstructive Pulmonary Disease (COPD)',
+            description: 'Based on the uploaded CT scan image, the lung fields exhibit hyperinflation, reduced parenchymal attenuation, and bronchial wall thickening, which are hallmark features of Chronic Obstructive Pulmonary Disease (COPD). Additional findings include flattening of the diaphragm and signs of air trapping, suggesting obstructive airway disease, most consistent with emphysematous or chronic bronchitic patterns.',
+            impression: 'CT features suggest COPD with emphysematous changes. Clinical correlation advised.',
+            predictionResult: 'Chronic Obstructive Pulmonary Disease (COPD)',
+            confidence: '89%',
+            areas: 'Lower right lobe; partial involvement of the left lower lobe',
+            recommendation: 'A comprehensive pulmonary assessment is strongly advised. Please consult a healthcare provider for spirometry and treatment planning. Early diagnosis and medical management can significantly improve quality of life and disease outcomes.',
+            note: 'This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.',
+            status: 'disease',
+            icon: '<i class="fas fa-lungs-virus" style="color: #DC2626;"></i>' // Red lungs virus icon for respiratory disease
         }
+    ];
+    
+    // Randomly select a disease for demo purposes
+    const randomDisease = diseases[Math.floor(Math.random() * diseases.length)];
+    
+    // Update the result title with the custom icon
+    const resultTitleEl = document.querySelector('.result-title');
+    resultTitleEl.innerHTML = `
+        ${randomDisease.icon} <span id="detectedDisease">${randomDisease.name}</span>
+    `;
+    
+    // Update the UI with the detected disease information
+    document.getElementById('diseaseDescription').textContent = randomDisease.description;
+    document.getElementById('impression').textContent = randomDisease.impression;
+    document.getElementById('predictionResult').textContent = randomDisease.predictionResult;
+    document.getElementById('confidenceLevel').textContent = randomDisease.confidence;
+    document.getElementById('affectedAreas').textContent = randomDisease.areas;
+    document.getElementById('recommendation').textContent = randomDisease.recommendation;
+    document.getElementById('medicalNote').textContent = randomDisease.note;
+    
+    // Change the result container color based on status
+    const resultDetails = document.querySelector('.result-details');
+    
+    if (randomDisease.status === 'healthy') {
+        // Green styling for healthy results
+        resultDetails.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+        resultDetails.style.borderLeftColor = '#10B981'; // Green border
+        resultTitleEl.style.color = '#10B981'; // Green title
+        resultContainer.style.backgroundColor = '#ebf1f9'; // Light blue-green background
         
-        // Scroll Animations
-        const fadeElements = document.querySelectorAll('.fade-in');
+        // Remove icons from result details except Note
+        updateResultIcons('green');
         
-        function checkScroll() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
+    } else {
+        // Red styling for disease detection
+        resultDetails.style.backgroundColor = 'rgba(220, 38, 38, 0.1)'; // Light red background
+        resultDetails.style.borderLeftColor = '#DC2626'; // Red border
+        resultTitleEl.style.color = '#DC2626'; // Red title
+        resultContainer.style.backgroundColor = '#FEF2F2'; // Light red container background
+        
+        // Remove icons from result details except Note
+        updateResultIcons('red');
+    }
+}
+
+// Updated function to only keep the Note icon
+function updateResultIcons(color) {
+    const strongElements = document.querySelectorAll('.result-details strong');
+    
+    strongElements.forEach(element => {
+        const text = element.textContent.trim();
+        
+        // Remove all icons from section headers except Note
+        if (text.includes('Impression')) {
+            element.innerHTML = `Impression:`;
+        } 
+        else if (text.includes('Prediction')) {
+            element.innerHTML = `Prediction Result:`;
         }
-        
-        // Initial check and scroll event listener
-        window.addEventListener('load', checkScroll);
-        window.addEventListener('scroll', checkScroll);
+        else if (text.includes('Confidence')) {
+            element.innerHTML = `Confidence:`;
+        }
+        else if (text.includes('Affected')) {
+            element.innerHTML = `Affected Areas:`;
+        }
+        else if (text.includes('Recommendation')) {
+            element.innerHTML = `Recommendation:`;
+        }
+        else if (text.includes('Note')) {
+            // Keep only the info-circle icon for Note
+            element.innerHTML = `<i class="fas fa-info-circle" style="margin-right: 8px;"></i>Note:`;
+        }
+    });
+}
         
     </script>
 </body>
