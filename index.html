@@ -70,8 +70,8 @@
         }
         
         .logo {
-            margin-top: 3px;
-            font-size: 17px;
+            margin-top: 1px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--primary-light);
             display: flex;
@@ -99,7 +99,7 @@
         
         .nav-link:hover {
             color: var(--primary-light);
-            transform: scale(1.07);
+            transform: scale(1.15);
         
         }
         
@@ -670,7 +670,7 @@
                 <div class="about-card fade-in delay-2">
                     <i class="fas fa-chart-line about-icon"></i>
                     <h3>High Accuracy</h3>
-                    <p>With over 95% accuracy in detecting common pulmonary conditions, our technology provides reliable results that can help in early diagnosis.</p>
+                    <p>With over 91% accuracy in detecting common pulmonary conditions, our technology provides reliable results that can help in early diagnosis.</p>
                 </div>
                 
                 <div class="about-card fade-in delay-3">
@@ -709,7 +709,7 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>Disease Classification</h3>
-                        <p>The system classifies the findings into specific pulmonary diseases, such as pneumonia, tuberculosis, lung cancer, COPD, and more.</p>
+                        <p>The system classifies the findings into specific pulmonary diseases, such as Pulmonary Fibrosis, Chronic Obstructive Pulmonary Disease (COPD) and more.</p>
                     </div>
                 </div>
                 
@@ -966,7 +966,7 @@ function simulateDetection() {
             status: 'healthy', // Add status field to determine color
             icon: '<i class="fas fa-lungs" style="color: #10B981;"></i>' // Green lungs icon for healthy
         },
-        {
+        {         
             name: 'Pulmonary Fibrosis',
             description: 'Based on the uploaded CT scan image, there is evidence of pulmonary fibrosis, characterized by interstitial thickening, subpleural reticulation, and early honeycombing patterns. These findings are consistent with fibrotic lung disease, typically involving chronic scarring of the lung tissue. There may also be areas of ground-glass opacities, indicating ongoing alveolar damage.',
             impression: 'CT features are consistent with pulmonary fibrosis. Recommend clinical correlation.',
